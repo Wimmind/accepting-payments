@@ -7,9 +7,10 @@ const PaymentForm: FC = () => {
   const defaultFormValues = {}
   paymentForm.forEach(item => defaultFormValues[item.name] = '')
   const [formValues, setFormValues] = useState(defaultFormValues)
+  console.log(formValues)
 
-  const handleInputChange = (field) => {
-    const { name, value } = field;
+  const handleInputChange = ({ name, value }) => {
+    console.log({ name, value })
     setFormValues({ ...formValues, [name]: value });
   }
 
@@ -20,9 +21,9 @@ const PaymentForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid>
         {paymentForm.map((item: any, key) => (
-          <Grid item xs={2} sm={4} md={4} key={key}>
+          <Grid key={key}>
             <CustomInput
               value={formValues[item.name]}
               onChange={handleInputChange}
@@ -31,9 +32,9 @@ const PaymentForm: FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Button variant="contained" color="primary" type="submit">
+      {/* <Button variant="contained" color="primary" type="submit">
         Submit
-      </Button>
+      </Button> */}
     </form >
   );
 }
